@@ -4,9 +4,27 @@ import Time exposing (Time)
 
 
 type alias Model =
-    Time
+    { time : Time
+    , target : Target
+    , clockMode : Clock
+    }
+
+
+type Target
+    = HourHand
+    | MinuteHand
+    | SecondHand
+    | None
+
+
+type Clock
+    = Start
+    | Stop
 
 
 initialModel : Model
 initialModel =
-    0.0
+    { time = 0.0
+    , target = None
+    , clockMode = Start
+    }

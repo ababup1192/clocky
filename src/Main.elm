@@ -7,6 +7,7 @@ import View exposing (view)
 import Update exposing (update)
 import Task
 import Time
+import Keyboard
 
 
 init : ( Model, Cmd Msg )
@@ -20,8 +21,16 @@ now =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions _ =
-    Time.every Time.second Msg.SetTime
+subscriptions { clockMode } =
+    if clockMode == Models.Start then
+        Sub.batch
+            [ Time.every Time.second <| always Msg.StartTime
+            , Keyboard.downs Msg.KeyDown
+            ]
+    else
+        Sub.batch
+            [ Keyboard.downs Msg.KeyDown
+            ]
 
 
 main : Program Never Model Msg
@@ -29,8 +38,6 @@ main =
     program
         { init = init
         , view = view
-        , subscriptions = always Sub.none
-
-        --  subscriptions
+        , subscriptions = subscriptions
         , update = update
         }
