@@ -1,0 +1,44 @@
+@import url(~sanitize.css/sanitize.css);
+#main {
+    padding: 20px;
+}
+
+.hybridEditor {
+    display: flex;
+    width: 900px;
+    border: 1px solid #000000;
+}
+
+.textEditor {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 450px;
+    height: 500px;
+}
+
+.visualEditor {
+    width: 450px;
+    height: 500px;
+    border-left: 1px solid #000000;
+}
+
+.clock {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.time {
+    width: 120px;
+    font-size: 4em;
+    text-align: center;
+}
+
+.sNeedle {
+    cursor: pointer;
+}
+
+.colon {
+    font-size : 2em;
+}
