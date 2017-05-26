@@ -1,4 +1,4 @@
-# Dotty
+# Clocky
 
 This is a Hybrid language for clock.
 
