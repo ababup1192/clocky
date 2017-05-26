@@ -77,42 +77,45 @@ update msg ({ target, time, clockMode } as model) =
                 ( { model | target = target }, Cmd.none )
 
             Msg.CanvasClick ->
-                let
-                    newClockMode =
-                        if clockMode == Models.Start then
-                            Models.Stop
-                        else
-                            Models.Start
-                in
-                    ( { model | target = Models.None, clockMode = newClockMode }, Cmd.none )
+                ( { model | target = Models.None }, Cmd.none )
 
             Msg.KeyDown code ->
-                let
-                    diffHour =
-                        if target == Models.HourHand && code == 39 then
-                            Time.hour
-                        else if target == Models.HourHand && code == 37 then
-                            negate Time.hour
-                        else
-                            0.0
+                if code == 32 then
+                    let
+                        newClockMode =
+                            if clockMode == Models.Start then
+                                Models.Stop
+                            else
+                                Models.Start
+                    in
+                        ( { model | target = Models.None, clockMode = newClockMode }, Cmd.none )
+                else
+                    let
+                        diffHour =
+                            if target == Models.HourHand && code == 39 then
+                                Time.hour
+                            else if target == Models.HourHand && code == 37 then
+                                negate Time.hour
+                            else
+                                0.0
 
-                    diffMinute =
-                        if target == Models.MinuteHand && code == 39 then
-                            Time.minute
-                        else if target == Models.MinuteHand && code == 37 then
-                            negate Time.minute
-                        else
-                            0.0
+                        diffMinute =
+                            if target == Models.MinuteHand && code == 39 then
+                                Time.minute
+                            else if target == Models.MinuteHand && code == 37 then
+                                negate Time.minute
+                            else
+                                0.0
 
-                    diffSecond =
-                        if target == Models.SecondHand && code == 39 then
-                            Time.second
-                        else if target == Models.SecondHand && code == 37 then
-                            negate Time.second
-                        else
-                            0.0
+                        diffSecond =
+                            if target == Models.SecondHand && code == 39 then
+                                Time.second
+                            else if target == Models.SecondHand && code == 37 then
+                                negate Time.second
+                            else
+                                0.0
 
-                    diff =
-                        diffHour + diffMinute + diffSecond
-                in
-                    ( { model | time = time + diff }, Cmd.none )
+                        diff =
+                            diffHour + diffMinute + diffSecond
+                    in
+                        ( { model | time = time + diff }, Cmd.none )
